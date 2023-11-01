@@ -20,15 +20,71 @@ export const CreateTodo = async (req, res) => {
 		await todo.save()
 
 		res.status(200).json({
-			success:true,
-			message:"Todo saved successfully.",
+			success: true,
+			message: "Todo saved successfully.",
 			todo
 		})
 	}
-	catch (err){
+	catch (err) {
 		res.status(400).json({
-			success:false,
-			message:err.message
+			success: false,
+			message: err.message
 		})
 	}
+}
+
+export const getTodo = async (req, res) => {
+
+	try {
+		const todos = await Todo.find({})
+
+		if (!todos) {
+			return res.status(402).json({
+				success: false,
+				message: "Unable to get todos."
+			})
+		}
+
+		res.status(200).json({
+			success: true,
+			message: "Todos fetched successfully.",
+			data: todos
+		})
+	}
+	catch (err) {
+		return res.status(400).json({
+			success: false,
+			message: err.message
+		})
+	}
+}
+
+export const getTodoById = async (req, res) => {
+
+	const {id} = req.params
+	console.log(id);
+	
+	try {
+		const todo = await Todo.findById(id)
+
+		if (!todo) {
+			return res.status(402).json({
+				success: false,
+				message: "Unable to get todo."
+			})
+		}
+
+		res.status(200).json({
+			success: true,
+			message: "Todos fetched successfully.",
+			data: todo
+		})
+	}
+	catch (err) {
+		return res.status(400).json({
+			success: false,
+			message: err.message
+		})
+	}
+
 }
