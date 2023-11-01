@@ -16,3 +16,7 @@ app.get('/',(req,res)=>{
 	res.send("<h1>hello everyone</h1>")
 })
 
+app.all("*",(req,res) => {
+	res.send("<h1>404 Page not found</h1>")
+})
+
