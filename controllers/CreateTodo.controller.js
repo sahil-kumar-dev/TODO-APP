@@ -61,16 +61,15 @@ export const getTodo = async (req, res) => {
 
 export const getTodoById = async (req, res) => {
 
-	const {id} = req.params
-	console.log(id);
-	
+	const { id } = req.params
+
 	try {
 		const todo = await Todo.findById(id)
 
 		if (!todo) {
 			return res.status(402).json({
 				success: false,
-				message: "Unable to get todo."
+				message: "Unable to get todo by the given id."
 			})
 		}
 
@@ -86,5 +85,4 @@ export const getTodoById = async (req, res) => {
 			message: err.message
 		})
 	}
-
 }
