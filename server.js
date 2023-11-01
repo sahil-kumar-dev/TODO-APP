@@ -1,9 +1,7 @@
-import express from "express";
+import { app } from "./app.js";
 import { connectToDB } from "./config/dbconfig.js";
 
-const app = express()
 const PORT = 8080
-
 
 connectToDB()
 
